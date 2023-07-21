@@ -1,0 +1,125 @@
+
+create table course ( course_id integer not null primary key,
+		      course_nm varchar(50) not null,
+		      course_started_date date,
+		      course_duration_in_years integer,
+		      course_fee integer not null);
+
+insert into course values (100,'Civil	Civil Eng','2005-01-10', 4,400000);
+insert into course values (101, 'BCA in Computers','2020-04-15',3,250000);
+insert into course values (102,'ECE	Electronics Eng','2020-08-17',4,600000);
+
+select * from course
+-- you to find the course which is most expensive
+
+select course_id from courses where course_fee = ( select max(course_fee) from courses )
+
+-- 8 different types of SELECT statements
+
+-- find the course names and duration in years for all the courses where the fees is less than 3 lakhs
+-- input / output / process (one table one scans)
+-- course_fee < 300000 / course_nm, course_duration_in_years / 
+-- simple query
+select <what you want>
+from <which table >
+where < what you know>
+select course_nm, course_duration_in_years
+from course
+where course_fee < 300000
+
+
+select * From student
+
+SQL OPERATORS ==>  = LIKE NOT IN <>
+-- Find all the students who are from BLR
+-- find student name and cities where name starts with A and city is Delhi
+select stu_name, stu_city
+from student
+where stu_name like 'A%'
+   and stu_city = 'Delhi'
+   
+   select * From student
+   
+   --find the students who dnt have email mentioned and who are from either Delhi or BLR
+   select * From student
+   select stu_name 
+   from student 
+   where stu_email IS NULL 
+       and stu_city in ('BLR' or 'Delhi')
+       
+null is special value (cannot compare NULL = or <> ..) -- IS NULL or IS NOT NULL
+   
+   
+   select * From student
+   
+   -- find all the students names who are from the same city as student Anil
+   input -- studnet_name is anil
+   output -- all the studnets who are from same (city as anil?)
+   
+   select stu_name
+   from student
+   where stu_city = (select stu_city from student where stu_name = 'Anil')
+      and stu_name <> 'Anil'
+      
+      select * from course
+      
+      --find the course which started in the year 2020 and which costs more than 5 lakhs as fee
+      
+      sql functions -- date functions, number functions and string functions
+      
+      select course_nm
+      from course
+      where course_fee > 500000
+      and course_started_date between '2020-01-01' and '2020-12-31'
+      
+      
+      select * from course;
+      select * from student;
+      
+      -- find the course names which require more duration than BCA in Computers
+      
+      -- find all the student names who are enrolled into Civil Eng
+      select * From course
+      
+      select * from student where course_id=(select course_id from course where course_nm ='Civil Eng')
+      -- sub query -- can i solve with simple query
+      
+      -- find the course_name which is enrolled by Anil
+      select * from student
+      
+      select course_nm
+      from course
+      where course_id = (select course_id from student where stu_name = 'Anil')
+      
+      --find the course name, course_in_duration, and the student name for BCA in Computers Course
+      -- if we need data from more than one table in the result set (output) -- JOIN
+      -- common column (relationship between) 1: M -- course_id
+      
+      simple query, sub query, joins
+      
+		select course_nm, course_duration_in_years, stu_name
+        from course inner join student
+           on course.course_id = student.course_id
+		where course_nm = 'BCA in Computers'
+        
+        select * from course
+        
+        -- find the course where we dont have any enrollments
+        -- i am looking for unmatching record 
+        
+        select course_nm, course_id
+        from course
+        where course nm like 'ECE%'
+        
+        select count(*) from student -- type of query is this?
+        step 1-- select * from student
+        step2 -- count the rows in the memory
+        
+        
+        
+        not in (select distinct course_id from student)
+        
+        
+        data -- course and student (matching records, un matching records)
+           
+      
